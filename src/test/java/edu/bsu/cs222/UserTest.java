@@ -9,9 +9,10 @@ public class UserTest {
     public void UserInput(){
         WikiUser wikiUser = new WikiUser();
         String input = "hockey";
-        String output = wikiUser.UserInput2(input);
+        String output = wikiUser.doTheSearch();
         Assertions.assertEquals(input,output);
         System.out.println(output);
     }
+
 
 }
