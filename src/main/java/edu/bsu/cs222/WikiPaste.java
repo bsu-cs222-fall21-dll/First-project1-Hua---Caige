@@ -1,36 +1,40 @@
 package edu.bsu.cs222;
 
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.InputStream;
+import java.net.ConnectException;
+import java.net.URL;
 import java.net.URLConnection;
-import java.nio.charset.StandardCharsets;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
 
 public class WikiPaste extends WikiSearch{
-    public static void main(String[] args) throws IOException, ParserConfigurationException,
-            SAXException, TransformerException {
-        WikiSearch wikiSearch = new WikiSearch();
-        URLConnection connection = wikiSearch.connectToWikipedia();
-        Document document = wikiSearch.readXmlDocumentFrom(connection);
-        printDocument(document);
-    }
-    public static void printDocument(Document document) throws TransformerException{
-        TransformerFactory transFormer = TransformerFactory.newInstance();
-        Transformer transformer = transFormer.newTransformer();
-        transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION,"no");
-        transformer.setOutputProperty(OutputKeys.METHOD, "json");
-        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-        transformer.setOutputProperty(OutputKeys.ENCODING,"UTF-8");
-        transformer.setOutputProperty("{http://json.apache.org/xslt}indent-amount","4");
-        transformer.transform(new DOMSource(document), new StreamResult(new OutputStreamWriter(System.out, StandardCharsets.UTF_8)));
-
+    public String getRevisionOf(String wikiTitle) throws IOException{
+        String urlStr = String.format("en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&titles=%s&rbprop=timestamp&rvlimit=1",wikiTitle);
+        String encodedUrlStr = URLEncoder.encode(urlStr, Charset.defaultCharset());
+        if( wikiTitle == ""){
+            System.out.println("There was no Input");
+            System.exit(1);
+            return null;
+        }
+        try {
+            URL url = new URL(encodedUrlStr);
+            URLConnection connection = url.openConnection();
+            connection.setRequestProperty("User-Agent","Revision Reporter/0.1; carogers@bsu.edu");
+            connection.connect();
+            InputStream inputStream = connection.getInputStream();
+            WikipediaRevisionParser parser = new WikipediaRevisionParser();
+            String revisions = parser.parse(inputStream);
+            String jsonWiki1 = revisions.replace("},{", "\n");
+            String jsonWiki2 = jsonWiki1.replace("},{", "\n");
+            String jsonWiki3 = jsonWiki2.replace("},{", "\n");
+            String jsonWiki4 = jsonWiki3.replace("},{", "\n");
+            String jsonWiki5 = jsonWiki4.replace("},{", "\n");
+            return jsonWiki5;
+        } catch(ConnectException connectException){
+            System.out.println("There was a network Error");
+            System.exit(3);
+            return null;
+        }
     }
 }
