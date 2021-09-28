@@ -1,51 +1,31 @@
 package edu.bsu.cs222;
 
-import com.sun.tools.javac.Main;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Scanner;
 
-import java.io.*;
-import java.net.ConnectException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-import java.nio.charset.Charset;
 
-public class WikiPaste {
-    public String getRevisionOf(String wikiTitle) throws IOException{
 
-        String urlStr = String.format("en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&titles=%s&rbprop=timestamp&rvlimit=1",wikiTitle);
-        String encodedUrlStr = URLEncoder.encode(urlStr, Charset.defaultCharset());
-        if( wikiTitle == ""){
+public class WikiPaste extends WikiSearch{
+
+    protected String wikiPaste() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        WikiSearch wikiSearch = new WikiSearch();
+        ListConvert listConvert = new ListConvert();
+        // User inputs Title
+        String input = scanner.nextLine();
+        if( input.equals("")){
             System.out.println("There was no Input");
             System.exit(1);
             return null;
+        } else {
+            System.out.println("There was an Input");
         }
-        URL url = new URL(encodedUrlStr);
-        URLConnection connection = url.openConnection();
-        connection.setRequestProperty("User-Agent","Revision Reporter/0.1; carogers@bsu.edu");
-        connection.connect();
-        InputStream inputStream = connection.getInputStream();
-        WikipediaRevisionParser parser = new WikipediaRevisionParser();
-        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
-        String pageTitle = br.readLine();
-        System.out.printf("Redirected to %s",pageTitle);
-        try {
-            String revisions = parser.parse(inputStream);
-            String jsonWiki1 = revisions.replace("},{", "\n");
-            String jsonWiki2 = jsonWiki1.replace("[{", "");
-            String jsonWiki3 = jsonWiki2.replace("\"user\":\"","");
-            String jsonWiki4 = jsonWiki3.replace("\",\"timestamp\":\"", "change was made at");
-            String jsonWiki5 = jsonWiki4.replace("}]", "");
+        // calls WikiSearch
+        System.out.println(getRevisionOf(input));
 
-            return jsonWiki5;
-        } catch(ConnectException connectException){
-            System.out.println("There was a network Error");
-            System.exit(3);
-        }
-
-        String checkPage = br.readLine();
-        br.close();
-        System.exit(2);
-        return checkPage;
+        return getRevisionOf(input);
 
     }
 }
