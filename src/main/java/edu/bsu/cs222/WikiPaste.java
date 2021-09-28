@@ -13,6 +13,7 @@ public class WikiPaste extends WikiSearch{
         Scanner scanner = new Scanner(System.in);
         WikiSearch wikiSearch = new WikiSearch();
         ListConvert listConvert = new ListConvert();
+        System.out.println();
         // User inputs Title
         String input = scanner.nextLine();
         if( input.equals("")){
