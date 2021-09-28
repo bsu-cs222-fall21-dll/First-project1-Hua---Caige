@@ -6,7 +6,8 @@ import java.nio.charset.Charset;
 public class WikiSearch {
 
     public static String getRevisionOf(String wikiTitle) throws IOException{
-        String urlStr = String.format("https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&titles=%s&rbprop=timestamp|user&rvlimit=30",wikiTitle);
+        String encodeUrlStr = URLEncoder.encode(wikiTitle,Charset.defaultCharset());
+        String urlStr = String.format("https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&titles=%s&rbprop=timestamp|user&rvlimit=30",encodeUrlStr);
 
         try {
             URL url = new URL(urlStr);
