@@ -9,13 +9,19 @@ import java.util.Scanner;
 
 public class WikiPaste extends WikiSearch{
 
-    protected String wikiPaste() throws IOException {
+    public String titleCall() {
         Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        return input;
+    }
+
+    protected String wikiPaste() throws IOException {
+
         WikiSearch wikiSearch = new WikiSearch();
         ListConvert listConvert = new ListConvert();
         System.out.println();
         // User inputs Title
-        String input = scanner.nextLine();
+        String input = titleCall();
         if( input.equals("")){
             System.out.println("There was no Input");
             System.exit(1);
