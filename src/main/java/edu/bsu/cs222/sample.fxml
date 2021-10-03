@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 
-
-<VBox xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bsu.cs222.UIScene">
-   <children>
-      <Label text="Scrabble" />
-   </children>
-</VBox>
+<GridPane fx:controller="edu.bsu.cs222.UIScene" xmlns:fx = "http://javafx.com/fxml"
+          alignment="center" hgap="10" vgap="10">
+</GridPane>
