@@ -17,7 +17,6 @@ public class WikiPaste extends WikiSearch{
 
     protected String wikiPaste() throws IOException {
 
-        WikiSearch wikiSearch = new WikiSearch();
         ListConvert listConvert = new ListConvert();
         System.out.println();
         // User inputs Title
@@ -30,7 +29,6 @@ public class WikiPaste extends WikiSearch{
             System.out.println("There was an Input");
         }
         // calls WikiSearch
-        System.out.println(getRevisionOf(input));
 
         return getRevisionOf(input);
 

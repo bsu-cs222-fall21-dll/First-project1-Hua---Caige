@@ -9,11 +9,9 @@ import java.io.InputStream;
 public class CheckError2 {
     public void pageCheck(InputStream inputStream) throws IOException {
 
-        JSONArray page = JsonPath.read(inputStream,"$..pages");
+        JSONArray page = JsonPath.read(inputStream,"$..");
         System.out.println(page.get(0).toString());
-        if(0 == Integer.parseInt(page.get(0).toString())){
-            System.out.println("There is no pages for this topic");
-        }
+
 
     }
 }

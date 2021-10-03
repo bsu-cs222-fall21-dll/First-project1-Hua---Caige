@@ -17,7 +17,7 @@ public class WikiSearch {
             InputStream inputStream = connection.getInputStream();
             WikipediaRevisionParser parser = new WikipediaRevisionParser();
             CheckError2 test = new CheckError2();
-            //test.pageCheck(inputStream);
+            test.pageCheck(inputStream);
             String revisions = parser.parse(inputStream);
             String jsonWiki1 = revisions.replace("},{", "\n");
             String jsonWiki2 = jsonWiki1.replace("[{", "");
