@@ -1,4 +1,4 @@
-package edu.bsu.cs222.UI;
+package edu.bsu.cs222;
 
 import java.awt.event.ActionEvent;
 

@@ -1,16 +1,22 @@
 package edu.bsu.cs222;
 
-import java.io.IOException;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class Main extends WikiPaste{
-    public static void main(String[] args) throws IOException {
-        WikiPaste wikiPaste = new WikiPaste();
-        System.out.println("--------------\n+--Wikipedia-+\n--------------\n");
-        System.out.println("Type what you want to search...");
-        // calls WikiPaste Class
-        System.out.println(wikiPaste.wikiPaste());
-        System.exit(0);
+public class Main extends Application {
 
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        primaryStage.setTitle("Hello World");
+        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.show();
+    }
 
+    public static void main(String[] args) {
+        launch(args);
     }
 }
