@@ -24,7 +24,10 @@ public class WikiSearch {
             String jsonWiki3 = jsonWiki2.replace("\"user\":\"", "");
             String jsonWiki4 = jsonWiki3.replace("\",\"timestamp\":\"", " made a change at ");
             String jsonWiki5 = jsonWiki4.replace("}]", "");
-            return jsonWiki5.replace("\"","");
+            String jsonWiki6 = jsonWiki5.replace("\"","");
+            ListConvert listConvert = new ListConvert();
+            //listConvert.revReversed();
+            return jsonWiki6;
         } catch(MalformedURLException malformedURLException){
             throw new RuntimeException(malformedURLException);
         }

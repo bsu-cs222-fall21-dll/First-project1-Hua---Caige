@@ -9,8 +9,11 @@ import java.io.InputStream;
 public class CheckError2 {
     public void pageCheck(InputStream inputStream) throws IOException {
 
-        JSONArray page = JsonPath.read(inputStream,"$..");
-        System.out.println(page.get(0).toString());
+        JSONArray page = JsonPath.read(inputStream,"$..pages");
+        if(page.indexOf(0) == -1){
+            System.out.println("No Article Found...");
+            System.exit(2);
+        }
 
 
     }
