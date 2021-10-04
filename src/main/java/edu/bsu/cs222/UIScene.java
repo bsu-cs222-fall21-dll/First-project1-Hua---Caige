@@ -21,11 +21,14 @@ public class UIScene {
     @SuppressWarnings("unused")
     @FXML
     public void CountWard(javafx.event.ActionEvent actionEvent) {
-        try{
-        URL url = new URL(urlField.getText());
-        if(urlField.equals("")){
+        WikiSearch wikiSearch = new WikiSearch();
+        if(urlField.getText().equals("")){
             System.exit(1);
         }
+        try{
+
+        URL url = new URL(urlField.getText());
+        wikiSearch.getRevisionOf(urlField.getText());
         executor.execute(new Runnable() {
             @Override
             public void run() {
@@ -42,9 +45,14 @@ public class UIScene {
         });
     }catch (MalformedURLException murle){
             throw new RuntimeException(murle);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-}
+    }
 
+
+    public void getResult(ActionEvent actionEvent) {
 
     }
+}
 

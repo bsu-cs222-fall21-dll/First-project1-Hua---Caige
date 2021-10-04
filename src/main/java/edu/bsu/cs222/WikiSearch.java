@@ -17,8 +17,6 @@ public class WikiSearch {
             connection.connect();
             InputStream inputStream = connection.getInputStream();
             WikipediaRevisionParser parser = new WikipediaRevisionParser();
-            CheckError2 test = new CheckError2();
-            //test.pageCheck(inputStream);
             String revisions = parser.parse(inputStream);
             ListConvert listConvert = new ListConvert();
             return revisions;
