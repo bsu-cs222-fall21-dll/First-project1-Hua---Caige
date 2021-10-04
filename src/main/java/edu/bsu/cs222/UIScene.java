@@ -13,8 +13,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class UIScene {
-    @FXML
-    private TextField ulrResult;
 
     @FXML
     private TextField urlField;
@@ -25,6 +23,9 @@ public class UIScene {
     public void CountWard(javafx.event.ActionEvent actionEvent) {
         try{
         URL url = new URL(urlField.getText());
+        if(urlField.equals("")){
+            System.exit(1);
+        }
         executor.execute(new Runnable() {
             @Override
             public void run() {
@@ -44,7 +45,6 @@ public class UIScene {
         }
 }
 
-    public void GetResult(ActionEvent actionEvent) {
 
     }
-}
+

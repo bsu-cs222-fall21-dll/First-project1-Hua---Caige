@@ -5,29 +5,27 @@
 <?import javafx.scene.text.*?>
 
 <VBox alignment="CENTER" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bsu.cs222.UIScene">
-   <children>
+
       <Label text="Wikipedia Search" />
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="6.0">
-         <children>
+
             <Label text="url">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
             <TextField fx:id="urlField" />
-         </children>
+
       </HBox>
       <Button mnemonicParsing="false" onAction="#CountWard" text="Search" />
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="6.0">
-         <children>
             <Label text="Result">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="ulrResult" editable="false" />
-            <Button mnemonicParsing="false" onAction="#GetResult" text="Get Result" />
-         </children>
+            <TextField editable="false" />
+
       </HBox>
-   </children>
+
 </VBox>
