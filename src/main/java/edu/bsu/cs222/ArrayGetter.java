@@ -7,19 +7,16 @@ import net.minidev.json.JSONArray;
 import java.io.*;
 
 public class ArrayGetter {
-    public String readLines(String jsonData,InputStream inputStream) throws IOException {
-        JSONArray result = (JSONArray) JsonPath.read(inputStream, "$..query");
-        System.out.println(result.get(0).toString());
-        System.out.println(result);
-        BufferedReader br = new BufferedReader(new StringReader(jsonData));
-        Reformatting reform = new Reformatting("","");
+    public String readLines(String jsonData) throws IOException {
+        StringReader fr = new StringReader(jsonData);
+        BufferedReader br = new BufferedReader(fr);
         StringBuilder builder = new StringBuilder();
+        Reformatting reform = new Reformatting();
         String read;
         while ((read = br.readLine()) != null) {
-            String user = reform.getUser();
-            String time = reform.getTimeStamp();
-            String line = String.format("At %s, %s made a change.\n",time,user);
-            builder.append(read);
+            System.out.println(read);
+            String getInfo = reform.oneForAll(reform.getUser(read),reform.getTime(read));
+            builder.append(getInfo);
         }
         return builder.toString();
     }

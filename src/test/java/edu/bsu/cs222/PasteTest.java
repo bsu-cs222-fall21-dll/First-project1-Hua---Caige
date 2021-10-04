@@ -11,7 +11,7 @@ public class PasteTest {
     public void testParse() throws IOException {
         WikipediaRevisionParser parser = new WikipediaRevisionParser();
         InputStream testDataStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("test.json");
-        String timeStamp = parser.parse(testDataStream);
+        String timeStamp = (String) parser.parse(testDataStream);
         Assertions.assertEquals("2021-09-20T01:32:48Z", timeStamp);
     }
 }
