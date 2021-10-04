@@ -9,23 +9,27 @@ import java.util.ArrayList;
 
 public class WikipediaRevisionParser {
     public String parse(InputStream testDataStream) throws IOException{
+        ArrayList<String> list = new ArrayList<>();
         Reformatting reform = new Reformatting();
         JSONArray revisions = JsonPath.read(testDataStream,"$..revisions");
-        JSONArray result = (JSONArray) JsonPath.read(revisions,"$..user");
-        JSONArray result2 = (JSONArray) JsonPath.read(revisions,"$..timestamp");
+        JSONArray result = JsonPath.read(revisions,"$..user");
+        JSONArray result2 = JsonPath.read(revisions,"$..timestamp");
         reform.getUser(result);
         String time;
-        String user = "";
-        String line = "";
+        String user;
+        StringBuilder line;
         for(int i = 0;i < 30;i++){
             user = result.get(i).toString();
             for(int j = 0;j < 1;j++){
                 time = result2.get(i).toString();
-                line = user + " " + time;
-                System.out.println(line);
+                line = new StringBuilder(user + " " + time);
+                list.add(i, line.toString());
             }
         }
-
-        return line;
+        line = new StringBuilder();
+        for(int k = 30;k > 0; k--){
+            line.append(list.get(k - 1)).append("\n");
+        }
+        return line.toString();
     }
 }

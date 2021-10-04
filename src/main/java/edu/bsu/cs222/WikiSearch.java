@@ -19,7 +19,6 @@ public class WikiSearch {
             WikipediaRevisionParser parser = new WikipediaRevisionParser();
             CheckError2 test = new CheckError2();
             //test.pageCheck(inputStream);
-
             String revisions = parser.parse(inputStream);
             ListConvert listConvert = new ListConvert();
             return revisions;
