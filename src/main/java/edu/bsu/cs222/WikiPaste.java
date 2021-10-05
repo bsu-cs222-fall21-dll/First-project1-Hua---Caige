@@ -17,9 +17,7 @@ public class WikiPaste extends WikiSearch{
 
     protected String wikiPaste() throws IOException {
 
-        ListConvert listConvert = new ListConvert();
         System.out.println();
-        // User inputs Title
         String input = titleCall();
         if( input.equals("")){
             System.out.println("There was no Input");

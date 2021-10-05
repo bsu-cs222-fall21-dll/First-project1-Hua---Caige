@@ -30,7 +30,7 @@ public class WikipediaRevisionParser {
         }
         line = new StringBuilder();
         for(int k = 30;k > 0; k--){
-            line.append(list.get(k - 1)).append("\n");
+            line.append("\n").append(list.get(k - 1)).append("\n");
         }
         return line.toString();
     }

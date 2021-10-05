@@ -9,7 +9,6 @@ public class WikiSearch {
     public static String getRevisionOf(String wikiTitle) throws IOException{
         String encodeUrlStr = URLEncoder.encode(wikiTitle,Charset.defaultCharset());
         String urlStr = String.format("https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&titles=%s&rbprop=timestamp|user&rvlimit=30&redirects",encodeUrlStr);
-        ArrayGetter ag = new ArrayGetter();
         try {
             URL url = new URL(urlStr);
             URLConnection connection = url.openConnection();
@@ -18,7 +17,6 @@ public class WikiSearch {
             InputStream inputStream = connection.getInputStream();
             WikipediaRevisionParser parser = new WikipediaRevisionParser();
             String revisions = parser.parse(inputStream);
-            ListConvert listConvert = new ListConvert();
             return revisions;
         } catch(MalformedURLException malformedURLException){
             throw new RuntimeException(malformedURLException);

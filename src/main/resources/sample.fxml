@@ -4,8 +4,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bsu.cs222.UIScene">
-      <HBox alignment="TOP_CENTER" prefHeight="113.0" prefWidth="339.0" spacing="6.0">
+<VBox alignment="CENTER" prefHeight="350.0" prefWidth="495.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bsu.cs222.UIScene">
+      <HBox alignment="TOP_CENTER" prefHeight="181.0" prefWidth="344.0" spacing="6.0">
       <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#CountWard" text="Search" />
             <TextField fx:id="urlField" alignment="TOP_CENTER" />
 
@@ -16,7 +16,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-      <ComboBox onAction="#getResult" prefWidth="150.0" />
+      <TextArea fx:id="result" prefHeight="200.0" prefWidth="200.0" />
 
       </HBox>
 

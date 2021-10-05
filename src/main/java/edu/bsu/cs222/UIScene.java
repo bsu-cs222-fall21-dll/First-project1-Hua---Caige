@@ -2,10 +2,11 @@ package edu.bsu.cs222;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -17,32 +18,19 @@ public class UIScene {
     @FXML
     private TextField urlField;
     private final Executor executor = Executors.newSingleThreadExecutor();
+    @FXML
+    private TextArea result;
 
     @SuppressWarnings("unused")
     @FXML
-    public void CountWard(javafx.event.ActionEvent actionEvent) {
+    public void CountWard(javafx.event.ActionEvent actionEvent) throws RuntimeException {
         WikiSearch wikiSearch = new WikiSearch();
+
         if(urlField.getText().equals("")){
             System.exit(1);
         }
         try{
-
-        URL url = new URL(urlField.getText());
-        wikiSearch.getRevisionOf(urlField.getText());
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                try{
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(url.openStream()));
-                String line;
-                while((line = bufferedReader.readLine()) != null){
-                    System.out.println(line);
-                }
-            }catch (IOException e){
-                    throw new RuntimeException();
-                }
-            }
-        });
+            getResult();
     }catch (MalformedURLException murle){
             throw new RuntimeException(murle);
         } catch (IOException e) {
@@ -51,8 +39,12 @@ public class UIScene {
     }
 
 
-    public void getResult(ActionEvent actionEvent) {
-
+    public void getResult() throws IOException {
+        WikiSearch wikiSearch = new WikiSearch();
+        String string = wikiSearch.getRevisionOf(urlField.getText());
+        String frontLine = string.substring(0,string.length()/2);
+        String lastLine = string.substring(string.length()/2,string.length());
+        result.appendText(frontLine + "\n" + lastLine);
     }
 }
 
